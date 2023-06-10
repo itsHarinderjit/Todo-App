@@ -10,7 +10,7 @@
 	justify-content: center;
 	align-items: center;
 }
-.container {
+.container_model {
 	background-color: var(--bg-2);
 	max-width: 500px;
 	width: 90%;
