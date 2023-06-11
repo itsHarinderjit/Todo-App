@@ -5,6 +5,8 @@ const getTodoList = () => {
     if(localTodoList) {
         return JSON.parse(localTodoList)
     }
+    window.localStorage.setItem('todoList',JSON.stringify([]))
+    return [];
 }
 
 const initialValue = {
@@ -14,21 +16,48 @@ const initialValue = {
 export const TodoSlice = createSlice({
     name: 'todo',
     initialState: initialValue,
-    reducer: {
-        addTodo: (state,action)=> {
+    reducers: {
+        addTodo(state,action){
             state.todoList.push(action.payload)
             const todolist = window.localStorage.getItem('todoList')
             if(todolist) {
                 const todolistArr = JSON.parse(todolist)
-                todolistArr.push(...action.payload)
+                todolistArr.push({...action.payload})
                 window.localStorage.setItem('todoList',JSON.stringify(todolistArr))
             }
             else {
                 window.localStorage.setItem('todoList',JSON.stringify([{...action.payload}]))
             }
+        },
+        deleteTodo(state,action) {
+            const todoList = window.localStorage.getItem('todoList')
+            if(todoList) {
+                const todoListArr = JSON.parse(todoList)
+                todoListArr.forEach((todo,index)=>{
+                    if(todo.id === action.payload) {
+                        todoListArr.splice(index,1)
+                    }
+                    window.localStorage.setItem('todoList',JSON.stringify(todoListArr))
+                    state.todoList = todoListArr
+                })
+            }
+        },
+        updateTodo(state,action) {
+            const todoList = window.localStorage.getItem('todoList')
+            if(todoList) {
+                const todoListArr = JSON.parse(todoList)
+                todoListArr.forEach((todo,index)=> {
+                    if(todo.id === action.payload.id) {
+                        todo.title = action.payload.Title
+                        todo.status = action.payload.Status
+                    }
+                })
+                window.localStorage.setItem('todoList',JSON.stringify(todoListArr))
+                state.todoList = todoListArr
+            }
         }
     }
 })
 
-export const {addTodo} = TodoSlice.actions
+export const {addTodo,deleteTodo,updateTodo} = TodoSlice.actions
 export default TodoSlice.reducer
