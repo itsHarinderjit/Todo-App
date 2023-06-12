@@ -10,6 +10,7 @@ const getTodoList = () => {
 }
 
 const initialValue = {
+    filterStatus : 'all',
     todoList : getTodoList()
 }
 
@@ -55,9 +56,12 @@ export const TodoSlice = createSlice({
                 window.localStorage.setItem('todoList',JSON.stringify(todoListArr))
                 state.todoList = todoListArr
             }
+        },
+        updataFilterStatus(state,action) {
+            state.filterStatus = action.payload
         }
     }
 })
 
-export const {addTodo,deleteTodo,updateTodo} = TodoSlice.actions
+export const {addTodo,deleteTodo,updateTodo,updataFilterStatus} = TodoSlice.actions
 export default TodoSlice.reducer
