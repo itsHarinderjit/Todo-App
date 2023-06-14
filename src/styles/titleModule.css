@@ -7,7 +7,19 @@
 	text-transform: uppercase;
 	text-align: center;
 	margin: 0 auto;
-	margin-top: 2rem;
+	padding-top: 8px;
+	opacity: 0.9;
+}
+
+.heading_wrapper {
+	display: flex;
+	background-color: white;
+	color: #626262;
+	height: 12vh;
 	margin-bottom: 1.5rem;
-	color: var(--black-1);
+}
+
+.heading_wrapper_dark {
+	background-color: #1b1b1b;
+	color: white;
 }

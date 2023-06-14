@@ -6,9 +6,16 @@
 	background: var(--white);
 	margin-bottom: 1.5rem;
 	border-radius: 4px;
-	&:last-child {
-		margin-bottom: 0;
-	}
+}
+.item__dark {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1rem;
+	/* background: var(--white); */
+	background-color: #343434;
+	margin-bottom: 1.5rem;
+	border-radius: 4px;
 }
 .todoDetails {
 	display: flex;
@@ -51,6 +58,11 @@
 	word-break: break-all;
 	font-size: 1.4rem;
 	color: var(--black-2);
+}
+.todoText__dark {
+	word-break: break-all;
+	font-size: 1.4rem;
+	color: white;
 }
 
 .todoText--complete {

@@ -3,14 +3,14 @@ import Button, { SelectButton } from './Button'
 import '../styles/appModule.css'
 import TodoModel from './TodoModel'
 import { useDispatch, useSelector } from 'react-redux'
-import { updataFilterStatus } from '../slices/TodoSlice'
+import { updateFilterStatus } from '../slices/TodoSlice'
 
 function AppHeader() {
   const [ModelOpen,setModelOpen] = useState(false)
   const FilterStatus = useSelector((state)=>state.todo.FilterStatus)
   const dispatch = useDispatch()
   function updateFilter(e) {
-    dispatch(updataFilterStatus(e.target.value))
+    dispatch(updateFilterStatus(e.target.value))
   }
   return (
     <div className='appHeader'>

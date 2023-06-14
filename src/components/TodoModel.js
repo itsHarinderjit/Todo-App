@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import Button from './Button'
 import '../styles/modelModule.css'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {v4 as uuid} from 'uuid'
-import { addTodo, updateTodo } from '../slices/TodoSlice'
+import { addTask, updateTask } from '../slices/TodoSlice'
 import { toast } from 'react-hot-toast'
 import { MdOutlineClose } from 'react-icons/md'
 
 function TodoModel({type,ModelOpen,setModelOpen,todo}) {
     const [Title,setTitle] = useState('')
     const [Status,setStatus] = useState('incomplete')
+    const colorMode = useSelector((state)=> state.todo.colorMode)
+    let colorClass = ''
+    if(colorMode==='dark') {
+        colorClass = '__dark'
+    }
     const dispatch = useDispatch()
     useEffect(()=>{
         if(type==='Update' && todo) {
@@ -25,7 +30,7 @@ function TodoModel({type,ModelOpen,setModelOpen,todo}) {
         e.preventDefault()
         if(Title && Status) {
             if(type==='Add') {
-                dispatch(addTodo({
+                dispatch(addTask({
                     id: uuid(),
                     title: Title,
                     status: Status,
@@ -36,8 +41,8 @@ function TodoModel({type,ModelOpen,setModelOpen,todo}) {
             }
             else {
                 if(todo.title !== Title || todo.status !== Status) {
-                    dispatch(updateTodo({
-                        ...todo,
+                    dispatch(updateTask({
+                        todo,
                         Title,
                         Status
                     }))
@@ -56,13 +61,13 @@ function TodoModel({type,ModelOpen,setModelOpen,todo}) {
         {
             ModelOpen && (
                 <div className='wrapper'>
-                <div className='container_model'>
-                    <div className='closeButton' role="button" tabIndex={0} 
+                <div className={`container_model${colorClass}`}>
+                    <div className={`closeButton${colorClass}`} role="button" tabIndex={0} 
                     onClick={()=>setModelOpen(false)} onKeyDown={()=>setModelOpen(false)}>
                         <MdOutlineClose/>
                     </div>
-                    <form className='form' onSubmit={(e)=>handleSubmit(e)}>
-                        <h1 className='formTitle'>{`${type} task`}</h1>
+                    <form className={`form${colorClass}`} onSubmit={(e)=>handleSubmit(e)}>
+                        <h1 className={`formTitle${colorClass}`}>{`${type} task`}</h1>
                         <label htmlFor='title'>
                             Title
                             <input id='title' type='text'

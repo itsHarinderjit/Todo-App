@@ -24,7 +24,11 @@ body {
 	font-family: 'Poppins', sans-serif;
 	width: 100%;
 	min-height: 100vh;
-	background-color: var(--bg-1);
+	/* background-color: var(--bg-1); */
+	background-image: url('../res/img2.jpg');
+	background-size: cover;
+	height: 100vh;
+	width: 100vw;
 }
 * {
 	font-family: 'Poppins', sans-serif;

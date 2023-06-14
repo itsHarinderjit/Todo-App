@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import '../styles/todoItemModule.css'
 import { useDispatch } from 'react-redux'
-import { updateTodo } from '../slices/TodoSlice'
+import { updateTask } from '../slices/TodoSlice'
 
 const checkVariants = {
 	initial : {
@@ -41,8 +41,8 @@ function CheckButton({checked,setChecked,todo}) {
 				Status = 'complete'
 			else
 				Status = 'incomplete'
-			dispatch(updateTodo({
-				...todo,
+			dispatch(updateTask({
+				todo,
 				Title,
 				Status
 			}))

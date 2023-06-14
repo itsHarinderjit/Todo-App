@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/todoItemModule.css'
 import { MdDelete, MdEdit } from 'react-icons/md'
-import { useDispatch,} from 'react-redux'
-import { deleteTodo,} from '../slices/TodoSlice'
+import { useDispatch, useSelector,} from 'react-redux'
+import { deleteTask } from '../slices/TodoSlice'
 import { toast } from 'react-hot-toast'
 import TodoModel from './TodoModel'
 import CheckButton from './CheckButton'
@@ -11,6 +11,11 @@ function TodoItem({ key,todo }) {
     const dispatch = useDispatch()
     const [ModelOpen,setModelOpen] = useState(false)
     const [Checked,setChecked] = useState(false)
+    const ColorType = useSelector((state)=>state.todo.colorMode)
+    let colorClass = ''
+    if(ColorType==='dark') {
+        colorClass = '__dark'
+    }
 
     useEffect(()=> {
         if(todo.status === 'complete') {
@@ -21,7 +26,7 @@ function TodoItem({ key,todo }) {
     },[todo.status])
 
     function handleDeleting() {
-        dispatch(deleteTodo(todo.id))
+        dispatch(deleteTask(todo.id))
         toast.success('Task deleted successfully')
     }
     function handleEditing() {
@@ -38,11 +43,11 @@ function TodoItem({ key,todo }) {
     }
   return (
     <>
-        <div className='item'>
+        <div className={`item${colorClass}`}>
             <div className='todoDetails'>
                 <CheckButton checked={Checked} setChecked={setChecked} todo={todo} />
                 <div className='texts'>
-                    <p className={`todoText todoText--${todo.status}`}>{todo.title}</p>
+                    <p className={`todoText${colorClass} todoText--${todo.status}`}>{todo.title}</p>
                     <p className='time'>{formatDate(todo.time)}</p>
                 </div>
             </div>
