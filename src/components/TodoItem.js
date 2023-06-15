@@ -10,8 +10,9 @@ import CheckButton from './CheckButton'
 function TodoItem({ key,todo }) {
     const dispatch = useDispatch()
     const [ModelOpen,setModelOpen] = useState(false)
-    const [Checked,setChecked] = useState(false)
+    const [Checked,setChecked] = useState(todo.status === 'complete' ? true : false)
     const ColorType = useSelector((state)=>state.todo.colorMode)
+    const userId = useSelector((state)=>state.auth.authId)
     let colorClass = ''
     if(ColorType==='dark') {
         colorClass = '__dark'
@@ -26,7 +27,10 @@ function TodoItem({ key,todo }) {
     },[todo.status])
 
     function handleDeleting() {
-        dispatch(deleteTask(todo.id))
+        dispatch(deleteTask({
+            id: todo.id,
+            userId
+        }))
         toast.success('Task deleted successfully')
     }
     function handleEditing() {
@@ -48,14 +52,14 @@ function TodoItem({ key,todo }) {
                 <CheckButton checked={Checked} setChecked={setChecked} todo={todo} />
                 <div className='texts'>
                     <p className={`todoText${colorClass} todoText--${todo.status}`}>{todo.title}</p>
-                    <p className='time'>{formatDate(todo.time)}</p>
+                    <p className={`time${colorClass}`}>{formatDate(todo.time)}</p>
                 </div>
             </div>
             <div className='todoActions'>
-                <div className='icon' role='button' tabIndex={0} onClick={()=> handleDeleting()} onKeyDown={()=> handleDeleting()}>
+                <div className={`icon${colorClass}`} role='button' tabIndex={0} onClick={()=> handleDeleting()} onKeyDown={()=> handleDeleting()}>
                     <MdDelete/>
                 </div>
-                <div className='icon' role='button' tabIndex={0} onClick={()=> handleEditing()} onKeyDown={()=> handleEditing()}>
+                <div className={`icon${colorClass}`} role='button' tabIndex={0} onClick={()=> handleEditing()} onKeyDown={()=> handleEditing()}>
                     <MdEdit/>
                 </div>
             </div>

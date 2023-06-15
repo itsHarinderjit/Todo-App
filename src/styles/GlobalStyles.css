@@ -16,6 +16,8 @@
 	--gray-2: #dedfe1;
 	--black: black;
 	--white: white;
+	--dark-primary: #1b1b1b;
+	--dark-secondary: #343434;
 }
 html {
 	font-size: 10px;

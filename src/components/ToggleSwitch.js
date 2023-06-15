@@ -14,7 +14,7 @@ function ToggleSwitch() {
         }
     }
     return (
-        <div className='toggle_wrapper'>
+        <div>
             <label className="switch">
             <input type="checkbox" id='colorMode' onClick={changeMode}/>
             <span className="slider round"></span>

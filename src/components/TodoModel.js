@@ -11,6 +11,7 @@ function TodoModel({type,ModelOpen,setModelOpen,todo}) {
     const [Title,setTitle] = useState('')
     const [Status,setStatus] = useState('incomplete')
     const colorMode = useSelector((state)=> state.todo.colorMode)
+    const userId = useSelector((state)=>state.auth.authId)
     let colorClass = ''
     if(colorMode==='dark') {
         colorClass = '__dark'
@@ -31,10 +32,13 @@ function TodoModel({type,ModelOpen,setModelOpen,todo}) {
         if(Title && Status) {
             if(type==='Add') {
                 dispatch(addTask({
-                    id: uuid(),
-                    title: Title,
-                    status: Status,
-                    time: new Date().toLocaleString(),
+                    todo: {
+                        id: uuid(),
+                        title: Title,
+                        status: Status,
+                        time: new Date().toLocaleString(),
+                    },
+                    userId
                 }))
                 toast.success('Task added successfully')
                 setModelOpen(false)
@@ -44,7 +48,8 @@ function TodoModel({type,ModelOpen,setModelOpen,todo}) {
                     dispatch(updateTask({
                         todo,
                         Title,
-                        Status
+                        Status,
+                        userId
                     }))
                     setModelOpen(false)
                 }

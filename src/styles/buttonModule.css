@@ -30,6 +30,13 @@
 	background-color: var(--bg-3);
 	color: var(--black-1);
 }
+.button--image {
+	margin-top: 1rem;
+	background-color: white;
+}
+.button--image__dark {
+	background-color: var(--dark-primary);
+}
 
 .button--primary__dark {
 	background-color: darkblue;

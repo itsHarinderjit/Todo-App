@@ -17,9 +17,34 @@
 	color: #626262;
 	height: 12vh;
 	margin-bottom: 1.5rem;
+	justify-content: space-between;
 }
 
 .heading_wrapper_dark {
-	background-color: #1b1b1b;
+	background-color: var(--dark-primary);
 	color: white;
+}
+
+.toggle_wrapper {
+	margin-right: 50px;
+	margin-top: 25px;
+	display: flex;
+	flex-direction: row;
+  }
+
+.toggleText {
+	font-size: 1.4rem;
+	flex-grow: 1;
+	font-weight: 500;
+	white-space: nowrap;
+	margin-right: 15px;
+}
+
+.authButtons {
+	margin-left: 50px;
+	flex-grow: 1;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-right: 0;
+	width: 20rem;
 }

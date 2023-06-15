@@ -2,18 +2,30 @@ import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
 import { db } from '../app/firebase'
 import { query,collection, getDocs, setDoc,doc,deleteDoc,updateDoc } from 'firebase/firestore'
 
+export const getTask = createAsyncThunk('todo/getTask',
+    async (data) => {
+        const q = query(collection(db,data.userId))
+        const querySnapshot = await getDocs(q)
+        let todolist = []
+        querySnapshot.forEach((doc)=> {
+            todolist.push({...doc.data()})
+        })
+        return todolist
+    }
+)
+
 export const addTask = createAsyncThunk('todo/addTask',
-    async (todo) => {
-        const todos = collection(db,'todos')
-        await setDoc(doc(todos,todo.id),todo)
-        return todo
+    async (data) => {
+        const todos = collection(db,data.userId)
+        await setDoc(doc(todos,data.todo.id),data.todo)
+        return data.todo
     }
 )
 
 export const deleteTask = createAsyncThunk('todo/deleteTask',
-    async (id) => {
-        await deleteDoc(doc(db,'todos',id))
-        return id
+    async (data) => {
+        await deleteDoc(doc(db,data.userId,data.id))
+        return data.id
     }
 )
 
@@ -25,22 +37,15 @@ export const updateTask = createAsyncThunk('todo/updateTask',
             status : data.Status,
             time : data.todo.time
         }
-        await updateDoc(doc(db,'todos',data.todo.id),newTodo)
+        await updateDoc(doc(db,data.userId,data.todo.id),newTodo)
         return data
     }
 )
 
-let todoArr = []
-const q = query(collection(db,'todos'))
-const querySnapshot = await getDocs(q);
-querySnapshot.forEach((doc)=> {
-    todoArr.push({...doc.data()})
-})
-
 const initialValue = {
     filterStatus : 'all',
     colorMode : 'light',
-    todoList : todoArr
+    todoList : []
 }
 
 export const TodoSlice = createSlice({
@@ -52,9 +57,15 @@ export const TodoSlice = createSlice({
         },
         updateColorMode(state,action) {
             state.colorMode = action.payload
+        },
+        emptyTodoList(state,action) {
+            state.todoList = []
         }
     },
     extraReducers: {
+        [getTask.fulfilled.type] : (state,action) => {
+            state.todoList = action.payload
+        },
         [addTask.fulfilled.type] : (state,action) => {
             state.todoList.push(action.payload)
         },
@@ -93,5 +104,5 @@ export const TodoSlice = createSlice({
     }
 })
 
-export const {addTodo,deleteTodo,updateTodo,updateFilterStatus,updateColorMode} = TodoSlice.actions
+export const {updateFilterStatus,updateColorMode,emptyTodoList} = TodoSlice.actions
 export default TodoSlice.reducer

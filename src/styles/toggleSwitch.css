@@ -1,8 +1,4 @@
 /* The switch - the box around the slider */
-.toggle_wrapper {
-  margin-right: 25px;
-  margin-top: 25px;
-}
 .switch {
     position: relative;
     display: inline-block;

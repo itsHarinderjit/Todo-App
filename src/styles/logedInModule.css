@@ -1,0 +1,43 @@
+.button_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.userPhoto {
+    border-radius: 2.4rem;
+    height: 4.8rem;
+    width: 4.8rem;
+}
+
+.logOutSection {
+    margin-top: 1.5rem;
+    margin-left: 10px;
+    background-color: white;
+    padding: 0.8rem 1rem;
+    border-radius: 1rem;
+}
+.logOutSection__dark {
+    margin-top: 1.5rem;
+    margin-left: 10px;
+    background-color: var(--dark-primary);
+    padding: 0.8rem 1rem;
+    border-radius: 1rem;
+}
+
+.userDataText {
+    color: black;
+    white-space: nowrap;
+}
+
+.userDataText__dark {
+    color: white;
+    white-space: nowrap;
+}
+
+.userName {
+    font-size: 1.5rem;
+}
+
+.email {
+    font-size: 1rem;
+}
