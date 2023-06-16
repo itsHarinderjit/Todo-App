@@ -19,9 +19,21 @@
 	--dark-primary: #1b1b1b;
 	--dark-secondary: #343434;
 }
-html {
-	font-size: 10px;
+
+/* need to make changes here */
+@media screen and (min-width: 541px) {
+	html {
+		font-size: 10px;
+	}
 }
+@media screen and (max-width: 540px) {
+	html {
+		font-size: 8px;
+	}
+}
+/* html {
+	font-size: 10px;
+} */
 body {
 	font-family: 'Poppins', sans-serif;
 	width: 100%;
