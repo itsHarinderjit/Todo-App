@@ -33,3 +33,7 @@
 	width: max-content;
 	height: auto;
 }
+
+.noContent__dark {
+	color: white;
+}

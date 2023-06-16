@@ -23,7 +23,7 @@ function AppContent() {
     <div className={`content__wrapper${colorClass}`}>
       { filteredTodoList && filteredTodoList.length>0 
         ? filteredTodoList.map((todo) => <TodoItem key={todo.id} todo={todo} />)
-        : <h3>No todo found</h3>
+        : <h3 className={`noContent${colorClass}`}>No todo found</h3>
       }
     </div>
   )

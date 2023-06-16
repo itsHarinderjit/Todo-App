@@ -16,13 +16,13 @@ function LogedIn() {
     let colorClass = ''
     if(colorType==='dark')
         colorClass = '__dark'
-    let title = ''
-    if(isLogedIn) {
-        title = 'Log Out'
-    }
-    else {
-        title = 'Log In'
-    }
+    // let title = ''
+    // if(isLogedIn) {
+    //     title = 'Log Out'
+    // }
+    // else {
+    //     title = 'Log In'
+    // }
     function handleClick() {
         console.log(auth.currentUser)
         if(isLogedIn) {
@@ -79,7 +79,7 @@ function LogedIn() {
            {
                 !isLogedIn && (
                     <>
-                        <Button variant='primary' type='button' onClick={handleClick}>{title}</Button>
+                        <Button variant='primary' type='button' onClick={handleClick}>LogIn</Button>
                     </>
                 )
            }
