@@ -6,7 +6,9 @@
 	font-weight: 700;
 	text-transform: uppercase;
 	text-align: center;
-	margin: 0 auto;
+	/* margin: 0 auto; */
+	margin-top: auto;
+	margin-bottom: auto;
 	padding-top: 8px;
 	opacity: 0.9;
 }

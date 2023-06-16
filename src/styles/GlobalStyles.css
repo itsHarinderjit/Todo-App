@@ -28,7 +28,12 @@
 }
 @media screen and (max-width: 540px) {
 	html {
-		font-size: 8px;
+		font-size: 7px;
+	}
+}
+@media screen and (max-width: 360px) {
+	html {
+		font-size: 5px;
 	}
 }
 /* html {
